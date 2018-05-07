@@ -1,7 +1,7 @@
 package ru.artempugachev.letsmvp.app
 
 import android.app.Application
-import ru.artempugachev.letsmvp.DaggerApplicationComponent
+import ru.artempugachev.letsmvp.login.LoginModule
 
 class LetsMvpApp : Application() {
     private lateinit var applicationComponent: ApplicationComponent
@@ -11,6 +11,7 @@ class LetsMvpApp : Application() {
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
+                .loginModule(LoginModule())
                 .build()
     }
 
