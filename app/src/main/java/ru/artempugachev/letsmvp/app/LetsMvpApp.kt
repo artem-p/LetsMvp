@@ -1,6 +1,7 @@
-package ru.artempugachev.letsmvp
+package ru.artempugachev.letsmvp.app
 
 import android.app.Application
+import ru.artempugachev.letsmvp.DaggerApplicationComponent
 
 class LetsMvpApp : Application() {
     private lateinit var applicationComponent: ApplicationComponent
@@ -14,7 +15,7 @@ class LetsMvpApp : Application() {
     }
 
 
-    fun getComponent(): ApplicationComponent{
+    fun getComponent(): ApplicationComponent {
         return applicationComponent
     }
 }

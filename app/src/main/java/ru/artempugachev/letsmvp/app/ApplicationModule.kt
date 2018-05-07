@@ -1,4 +1,4 @@
-package ru.artempugachev.letsmvp
+package ru.artempugachev.letsmvp.app
 
 import android.app.Application
 import android.content.Context

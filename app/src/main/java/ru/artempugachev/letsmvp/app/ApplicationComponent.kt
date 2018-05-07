@@ -1,10 +1,11 @@
-package ru.artempugachev.letsmvp
+package ru.artempugachev.letsmvp.app
 
 import dagger.Component
+import ru.artempugachev.letsmvp.login.LoginActivity
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
-    fun inject(target: MainActivity)
+    fun inject(target: LoginActivity)
 }
