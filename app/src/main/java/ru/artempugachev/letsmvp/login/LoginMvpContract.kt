@@ -27,6 +27,6 @@ interface LoginMvpContract {
     interface Model {
         fun createUser(firstName: String, lastName: String)
 
-        fun getUser(): User
+        fun getUser(): User?
     }
 }
