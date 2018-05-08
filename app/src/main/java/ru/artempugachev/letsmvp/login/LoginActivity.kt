@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity(), LoginMvpContract.View {
 
         (application as LetsMvpApp).getComponent().inject(this)
 
-        buttonLogin.setOnClickListener {  }
+        buttonLogin.setOnClickListener { presenter.loginButtonClicked() }
     }
 
 
@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity(), LoginMvpContract.View {
         super.onResume()
 
         presenter.bindView(this)
+        presenter.getCurrentUser()
     }
 
 
