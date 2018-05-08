@@ -20,7 +20,7 @@ class LoginModule {
 
 
     @Provides
-    fun provideLoginRepository(): LoginMemoryRepository {
+    fun provideLoginRepository(): LoginRepository {
         return LoginMemoryRepository()
     }
 }
