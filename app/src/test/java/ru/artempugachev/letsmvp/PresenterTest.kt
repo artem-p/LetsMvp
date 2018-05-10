@@ -69,6 +69,7 @@ class PresenterTest {
 
     @Test
     fun showErrorMessageIfNameFieldsAreEmpty() {
+        // test first name is empty
         `when`(mockView.getFirstName()).thenReturn("")
 
         presenter.saveUser()
@@ -76,5 +77,15 @@ class PresenterTest {
         verify(mockView, times(1)).getFirstName()
         verify(mockView, never()).getLastName()
         verify(mockView, times(1)).showInputError()
+
+        // test last name is empty
+        `when`(mockView.getFirstName()).thenReturn("First")
+        `when`(mockView.getLastName()).thenReturn("")
+
+        presenter.saveUser()
+
+        verify(mockView, times(2)).getFirstName()
+        verify(mockView, times(1)).getLastName()
+        verify(mockView, times(2)).showInputError()
     }
 }
