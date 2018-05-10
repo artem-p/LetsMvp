@@ -65,4 +65,16 @@ class PresenterTest {
         verify(mockView, never()).setLastName("Smith")
         verify(mockView, times(1)).showUserNotAvailable()
     }
+
+
+    @Test
+    fun showErrorMessageIfNameFieldsAreEmpty() {
+        `when`(mockView.getFirstName()).thenReturn("")
+
+        presenter.saveUser()
+
+        verify(mockView, times(1)).getFirstName()
+        verify(mockView, never()).getLastName()
+        verify(mockView, times(1)).showInputError()
+    }
 }

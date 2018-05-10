@@ -9,7 +9,7 @@ class LoginPresenterImpl(private val model: LoginMvpContract.Model) : LoginMvpCo
     }
 
 
-    override fun loginButtonClicked() {
+    override fun saveUser() {
         if (view?.getFirstName().isNullOrEmpty() || view?.getLastName().isNullOrEmpty()) {
             // empty first or last name, show error
             view?.showInputError()

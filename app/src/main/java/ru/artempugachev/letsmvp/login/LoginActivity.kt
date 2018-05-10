@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity(), LoginMvpContract.View {
 
         (application as LetsMvpApp).getComponent().inject(this)
 
-        buttonLogin.setOnClickListener { presenter.loginButtonClicked() }
+        buttonLogin.setOnClickListener { presenter.saveUser() }
     }
 
 

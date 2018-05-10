@@ -19,7 +19,7 @@ interface LoginMvpContract {
     interface Presenter {
         fun bindView(view: LoginMvpContract.View)
 
-        fun loginButtonClicked()
+        fun saveUser()
         fun getCurrentUser()
     }
 
