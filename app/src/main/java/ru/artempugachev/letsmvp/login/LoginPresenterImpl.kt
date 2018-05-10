@@ -1,6 +1,6 @@
 package ru.artempugachev.letsmvp.login
 
-class LoginPresenter(private val model: LoginMvpContract.Model) : LoginMvpContract.Presenter {
+class LoginPresenterImpl(private val model: LoginMvpContract.Model) : LoginMvpContract.Presenter {
     private var view: LoginMvpContract.View? = null
 
 

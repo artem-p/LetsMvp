@@ -2,7 +2,7 @@ package ru.artempugachev.letsmvp.login.repository
 
 import ru.artempugachev.letsmvp.data.User
 
-class LoginMemoryRepository : LoginRepository {
+class LoginMemoryRepositoryImpl : LoginRepository {
     private var user: User? = null
 
     override fun getUser(): User {
