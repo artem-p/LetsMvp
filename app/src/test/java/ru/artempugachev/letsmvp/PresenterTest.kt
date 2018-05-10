@@ -88,4 +88,22 @@ class PresenterTest {
         verify(mockView, times(1)).getLastName()
         verify(mockView, times(2)).showInputError()
     }
+
+
+    @Test
+    fun saveUserToRepository() {
+        `when`(mockView.getFirstName()).thenReturn("John")
+        `when`(mockView.getLastName()).thenReturn("Smith")
+
+        presenter.saveUser()
+
+        verify(mockView, times(2)).getFirstName()
+        verify(mockView, times(2)).getLastName()
+
+        // verify repository saved the user
+        verify(mockLoginModel, times(1)).createUser("John", "Smith")
+
+        // make sure user saved message shown
+        verify(mockView, times(1)).showUserSavedMessage()
+    }
 }
