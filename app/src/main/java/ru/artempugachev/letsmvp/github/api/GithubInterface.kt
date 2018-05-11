@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface GithubInterface {
     @GET("users")
-    fun getUsers(@Query("per_page") usersPerPage: Int): Call<UserResponse>
+    fun getUsers(@Query("per_page") usersPerPage: Int): Call<List<UserResponse>>
 }
