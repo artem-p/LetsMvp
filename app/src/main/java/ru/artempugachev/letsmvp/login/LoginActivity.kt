@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity(), LoginMvpContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        (application as LetsMvpApp).getComponent().inject(this)
+        (application as LetsMvpApp).getApplicationComponent().inject(this)
 
         buttonLogin.setOnClickListener { presenter.saveUser() }
     }
