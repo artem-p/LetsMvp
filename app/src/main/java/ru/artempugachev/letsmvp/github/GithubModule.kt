@@ -1,4 +1,4 @@
-package ru.artempugachev.letsmvp.github.api
+package ru.artempugachev.letsmvp.github
 
 import dagger.Module
 
