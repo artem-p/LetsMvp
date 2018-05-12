@@ -2,7 +2,6 @@ package ru.artempugachev.letsmvp.github
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,8 +35,13 @@ class GithubUsersActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<UserResponse>>, response: Response<List<UserResponse>>) {
                 val users = response.body()
 
-                Toast.makeText(this@GithubUsersActivity, users?.get(0)?.login.toString(), Toast.LENGTH_SHORT).show()
+                users?.let {
+                    for (user in it) {
+                        System.out.println(user.login)
+                    }
+                }
             }
+
 
             override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
                 t.printStackTrace()
