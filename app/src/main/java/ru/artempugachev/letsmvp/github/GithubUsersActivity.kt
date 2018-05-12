@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class GithubUsersActivity : AppCompatActivity() {
     @Inject
-    private lateinit var githubInterface: GithubInterface
+    lateinit var githubInterface: GithubInterface
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

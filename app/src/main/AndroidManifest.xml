@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.artempugachev.letsmvp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".app.LetsMvpApp"
         android:allowBackup="true"
@@ -11,13 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".login.LoginActivity">
+
+        </activity>
+
+        <activity android:name=".github.GithubUsersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".github.GithubUsersActivity"></activity>
     </application>
 
 </manifest>
