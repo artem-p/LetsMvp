@@ -3,6 +3,8 @@ package ru.artempugachev.letsmvp.github
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +56,10 @@ class GithubUsersActivity : AppCompatActivity() {
         val usersObservable = githubInterface.getUsersObservable(USER_PER_PAGE)
 
         val userLoginsObservable = usersObservable.flatMap{userResponse -> Observable.just(userResponse.login)}
+
+        userLoginsObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({login -> System.out.println("With Rx: $login")})
     }
 }
 
