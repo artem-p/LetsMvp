@@ -57,6 +57,7 @@ class GithubUsersActivity : AppCompatActivity() {
 
         val userLoginsObservable = usersObservable.flatMap{userResponse -> Observable.just(userResponse.login)}
 
+        // todo test and complete note
         userLoginsObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({login -> System.out.println("With Rx: $login")})
