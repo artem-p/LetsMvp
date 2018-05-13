@@ -2,6 +2,7 @@ package ru.artempugachev.letsmvp.github
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +30,7 @@ class GithubUsersActivity : AppCompatActivity() {
      * Make call to github api
      * */
     private fun queryGithub() {
+        // without rx
         val call = githubInterface.getUsers(USER_PER_PAGE)
 
         call.enqueue(object : Callback<List<UserResponse>>{
@@ -47,6 +49,11 @@ class GithubUsersActivity : AppCompatActivity() {
                 t.printStackTrace()
             }
         })
+
+        // with rx
+        val usersObservable = githubInterface.getUsersObservable(USER_PER_PAGE)
+
+        val userLoginsObservable = usersObservable.flatMap{userResponse -> Observable.just(userResponse.login)}
     }
 }
 
