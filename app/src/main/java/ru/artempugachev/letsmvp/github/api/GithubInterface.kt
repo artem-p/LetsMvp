@@ -10,5 +10,5 @@ interface GithubInterface {
     fun getUsers(@Query("per_page") usersPerPage: Int): Call<List<UserResponse>>
 
     @GET("users")
-    fun getUsersObservable(@Query("per_page") usersPerPage: Int): Observable<UserResponse>
+    fun getUsersObservable(@Query("per_page") usersPerPage: Int): Observable<List<UserResponse>>
 }

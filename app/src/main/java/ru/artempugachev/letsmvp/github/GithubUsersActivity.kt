@@ -55,12 +55,11 @@ class GithubUsersActivity : AppCompatActivity() {
         // with rx
         val usersObservable = githubInterface.getUsersObservable(USER_PER_PAGE)
 
-        val userLoginsObservable = usersObservable.flatMap{userResponse -> Observable.just(userResponse.login)}
+        val usersLoginObservable = usersObservable.flatMap{userResponse -> Observable.fromIterable(userResponse)}
 
-        // todo test and complete note
-        userLoginsObservable.subscribeOn(Schedulers.io())
+        usersLoginObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({login -> System.out.println("With Rx: $login")})
+                .subscribe({userResponse -> System.out.println("With Rx: ${userResponse.login}")})
     }
 }
 
