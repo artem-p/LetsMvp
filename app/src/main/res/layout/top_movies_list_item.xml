@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/standard_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:foreground="?android:selectableItemBackground"
+    >
+    
+    <TextView
+        android:id="@+id/movieName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Birdman"
+        android:layout_gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/countryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="USA"
+        />
+</LinearLayout>
