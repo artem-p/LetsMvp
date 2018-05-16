@@ -1,6 +1,7 @@
 package ru.artempugachev.letsmvp.topmovies
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -50,6 +51,6 @@ class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
 
 
     override fun showSnackbar(message: String) {
-
+        Snackbar.make(topMoviesRootLayout, message, Snackbar.LENGTH_SHORT).show()
     }
 }
