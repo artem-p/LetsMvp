@@ -4,7 +4,7 @@ import io.reactivex.Observable
 
 interface TopMoviesMvpContract {
     interface View {
-        fun updateData(model: MovieViewModel)
+        fun updateData(viewModel: MovieViewModel)
         fun showSnackbar(message: String)
     }
 

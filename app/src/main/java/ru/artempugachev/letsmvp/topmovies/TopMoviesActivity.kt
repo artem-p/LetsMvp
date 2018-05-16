@@ -11,7 +11,7 @@ class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
 
 
     private lateinit var adapter: MoviesAdapter
-    private var presenter: TopMoviesMvpContract.Presenter = MoviePresenterImpl()
+    private var presenter: TopMoviesMvpContract.Presenter = MoviePresenterImpl(MovieModelImpl())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,8 @@ class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
 
 
     // view methods
-    override fun updateData(model: MovieViewModel) {
-
+    override fun updateData(viewModel: MovieViewModel) {
+        adapter.addItem(viewModel)
     }
 
 

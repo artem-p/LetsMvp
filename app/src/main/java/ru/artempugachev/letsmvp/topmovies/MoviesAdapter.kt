@@ -9,11 +9,7 @@ import kotlinx.android.synthetic.main.top_movies_list_item.view.*
 import ru.artempugachev.letsmvp.R
 
 class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
-    private var movies: List<MovieViewModel>
-
-    init {
-        this.movies = ArrayList()
-    }
+    private var movies: MutableList<MovieViewModel> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
@@ -41,10 +37,12 @@ class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         }
     }
 
-
-    fun swap(newMovies: List<MovieViewModel>) {
-        this.movies = newMovies
-        notifyDataSetChanged()
+    /**
+     * Add single item to the list
+     * */
+    fun addItem(viewModel: MovieViewModel) {
+        movies.add(viewModel)
+        notifyItemChanged(movies.size - 1)
     }
 
 
