@@ -7,8 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_top_movies.*
 import ru.artempugachev.letsmvp.R
 
-class TopMoviesActivity : AppCompatActivity() {
+class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
+
+
     private lateinit var adapter: MoviesAdapter
+    private var presenter = MoviePresenterImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,5 +27,23 @@ class TopMoviesActivity : AppCompatActivity() {
         moviesRecycler.itemAnimator = DefaultItemAnimator()
         moviesRecycler.setHasFixedSize(true)
         moviesRecycler.layoutManager = LinearLayoutManager(this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        presenter.bindView(this)
+        presenter.loadData()
+    }
+
+
+    // view methods
+    override fun updateData(model: MovieViewModel) {
+
+    }
+
+
+    override fun showSnackbar(message: String) {
+
     }
 }
