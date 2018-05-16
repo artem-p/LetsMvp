@@ -11,7 +11,7 @@ interface TopMoviesMvpContract {
 
     interface Presenter {
         fun loadData()
-        fun rxUnsubscribe()
+        fun unsubscribeRx()
         fun bindView(view: View)
     }
 

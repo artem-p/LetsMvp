@@ -11,7 +11,7 @@ class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
 
 
     private lateinit var adapter: MoviesAdapter
-    private var presenter = MoviePresenterImpl()
+    private var presenter: TopMoviesMvpContract.Presenter = MoviePresenterImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,12 @@ class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
         super.onResume()
         presenter.bindView(this)
         presenter.loadData()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unsubscribeRx()
     }
 
 
