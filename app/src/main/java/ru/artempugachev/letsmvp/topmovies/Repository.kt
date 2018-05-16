@@ -14,5 +14,5 @@ interface Repository {
 
     fun getCountryData(): Observable<String>
 
-    fun getResultData(): Observable<MovieDbResponse>
+    fun getMovieData(): Observable<MovieDbResponse>
 }

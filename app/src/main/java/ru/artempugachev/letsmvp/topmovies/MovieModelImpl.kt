@@ -1,9 +1,18 @@
 package ru.artempugachev.letsmvp.topmovies
 
 import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
+import ru.artempugachev.letsmvp.topmovies.api.MovieDbResponse
 
-class MovieModelImpl : TopMoviesMvpContract.Model {
+class MovieModelImpl(private val repository: Repository) : TopMoviesMvpContract.Model {
     override fun result(): Observable<MovieViewModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.zip(
+                repository.getMovieData(),
+                repository.getCountryData(),
+                BiFunction<MovieDbResponse, String, MovieViewModel> {
+                    movieDbResponse: MovieDbResponse, country: String ->
+                    MovieViewModel(movieDbResponse.title ?: "", country)
+                }
+        )
     }
 }
