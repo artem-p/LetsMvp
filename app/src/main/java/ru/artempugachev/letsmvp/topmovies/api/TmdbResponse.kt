@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-class TmdbApi {
+class TmdbResponse {
     @SerializedName("page")
     @Expose
     var page: Int? = null
