@@ -1,12 +1,12 @@
 package ru.artempugachev.letsmvp.topmovies
 
 import io.reactivex.Observable
-import ru.artempugachev.letsmvp.topmovies.api.MovieDbResponse
+import ru.artempugachev.letsmvp.topmovies.api.TmdbMovie
 
 interface Repository {
-    fun getMoviesFromMemory(): Observable<MovieDbResponse>
+    fun getMoviesFromMemory(): Observable<TmdbMovie>
 
-    fun getMoviesFromNetwork(): Observable<MovieDbResponse>
+    fun getMoviesFromNetwork(): Observable<TmdbMovie>
 
     fun getCountriesFromMemory(): Observable<String>
 
@@ -14,5 +14,5 @@ interface Repository {
 
     fun getCountryData(): Observable<String>
 
-    fun getMovieData(): Observable<MovieDbResponse>
+    fun getMovieData(): Observable<TmdbMovie>
 }

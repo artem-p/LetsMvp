@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_top_movies.*
 import ru.artempugachev.letsmvp.R
+import ru.artempugachev.letsmvp.app.LetsMvpApp
 
 class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
 
@@ -17,6 +18,9 @@ class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top_movies)
+
+        (application as LetsMvpApp).getTopMoviesComponent().inject(this)
+
 
         setUpViews()
     }
