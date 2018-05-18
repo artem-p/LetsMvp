@@ -8,12 +8,15 @@ import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_top_movies.*
 import ru.artempugachev.letsmvp.R
 import ru.artempugachev.letsmvp.app.LetsMvpApp
+import javax.inject.Inject
 
 class TopMoviesActivity : AppCompatActivity(), TopMoviesMvpContract.View {
 
 
     private lateinit var adapter: MoviesAdapter
-    private var presenter: TopMoviesMvpContract.Presenter = MoviePresenterImpl(MovieModelImpl())
+
+    @Inject
+    lateinit var presenter: TopMoviesMvpContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

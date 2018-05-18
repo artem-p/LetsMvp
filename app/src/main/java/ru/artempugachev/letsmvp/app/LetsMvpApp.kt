@@ -5,6 +5,7 @@ import ru.artempugachev.letsmvp.github.DaggerGithubComponent
 import ru.artempugachev.letsmvp.github.GithubComponent
 import ru.artempugachev.letsmvp.github.GithubModule
 import ru.artempugachev.letsmvp.login.LoginModule
+import ru.artempugachev.letsmvp.topmovies.di.DaggerTopMoviesComponent
 import ru.artempugachev.letsmvp.topmovies.di.TopMoviesComponent
 import ru.artempugachev.letsmvp.topmovies.di.TopMoviesModule
 
@@ -27,7 +28,7 @@ class LetsMvpApp : Application() {
                 .githubModule(GithubModule())
                 .build()
 
-        topMoviesComponent = DaggerApplicationComponent.builder()
+        topMoviesComponent = DaggerTopMoviesComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .topMoviesModule(TopMoviesModule())
                 .build()
@@ -41,5 +42,10 @@ class LetsMvpApp : Application() {
 
     fun getGithubComponent(): GithubComponent {
         return githubComponent
+    }
+
+
+    fun getTopMoviesComponent(): TopMoviesComponent {
+        return topMoviesComponent
     }
 }

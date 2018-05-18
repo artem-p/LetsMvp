@@ -1,5 +1,6 @@
 package ru.artempugachev.letsmvp.topmovies.di
 
+import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,9 +15,10 @@ import ru.artempugachev.letsmvp.topmovies.api.OmdbService
  * Provide Retrofit api interface for Omdb.
  * Use it to retrieve origin country.
  * */
+@Module
 class OmdbModule {
     @Provides
-    private fun provideClient(): OkHttpClient {
+    fun provideClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
 
@@ -38,7 +40,7 @@ class OmdbModule {
 
 
     @Provides
-    private fun provideRetrofit(baseURL: String, client: OkHttpClient): Retrofit {
+    fun provideRetrofit(baseURL: String, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(baseURL)
                 .client(client)

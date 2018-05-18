@@ -7,7 +7,12 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [ApplicationModule::class, TopMoviesModule::class])
+@Component(modules = [ApplicationModule::class,
+    TmdbModule::class,
+    OmdbModule::class,
+    TopMoviesModule::class])
+
+
 interface TopMoviesComponent {
     fun inject(target: TopMoviesActivity)
 }

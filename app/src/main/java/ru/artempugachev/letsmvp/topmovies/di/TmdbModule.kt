@@ -1,5 +1,6 @@
 package ru.artempugachev.letsmvp.topmovies.di
 
+import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,9 +13,10 @@ import ru.artempugachev.letsmvp.topmovies.api.TmdbService
 /**
  * Provide Retrofit api interface for Tmdb
  * */
+@Module
 class TmdbModule {
     @Provides
-    private fun provideClient(): OkHttpClient {
+    fun provideClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
 
@@ -36,7 +38,7 @@ class TmdbModule {
 
 
     @Provides
-    private fun provideRetrofit(baseURL: String, client: OkHttpClient): Retrofit {
+    fun provideRetrofit(baseURL: String, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(baseURL)
                 .client(client)
@@ -50,6 +52,7 @@ class TmdbModule {
     fun provideApiService(): TmdbService {
         return provideRetrofit(BASE_URL, provideClient()).create(TmdbService::class.java)
     }
+
 
     companion object {
         const val BASE_URL = "http://api.themoviedb.org/3/movie/"
