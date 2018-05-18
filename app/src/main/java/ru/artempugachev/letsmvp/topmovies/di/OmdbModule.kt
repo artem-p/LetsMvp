@@ -7,12 +7,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.artempugachev.letsmvp.topmovies.api.TmdbService
+import ru.artempugachev.letsmvp.topmovies.api.OmdbService
+
 
 /**
- * Provide Retrofit api interface for Tmdb
+ * Provide Retrofit api interface for Omdb.
+ * Use it to retrieve origin country.
  * */
-class TmdbModule {
+class OmdbModule {
     @Provides
     private fun provideClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -47,13 +49,15 @@ class TmdbModule {
 
 
     @Provides
-    fun provideApiService(): TmdbService {
-        return provideRetrofit(BASE_URL, provideClient()).create(TmdbService::class.java)
+    fun provideApiService(): OmdbService {
+        return provideRetrofit(BASE_URL, provideClient()).create(OmdbService::class.java)
     }
 
+
     companion object {
-        const val BASE_URL = "http://api.themoviedb.org/3/movie/"
-        const val API_KEY = "8551c026bbf22a4a386ebb5b87a5296b"
+        const val BASE_URL = "http://www.omdbapi.com"
+        const val API_KEY = "4f1016c2"
     }
 }
+
 
