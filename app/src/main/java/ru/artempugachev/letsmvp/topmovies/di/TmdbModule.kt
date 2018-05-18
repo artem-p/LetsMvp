@@ -12,7 +12,7 @@ import ru.artempugachev.letsmvp.topmovies.api.TmdbService
 
 class TmdbModule {
     @Provides
-    fun provideClient(): OkHttpClient {
+    private fun provideClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
 
@@ -34,7 +34,7 @@ class TmdbModule {
 
 
     @Provides
-    fun provideRetrofit(baseURL: String, client: OkHttpClient): Retrofit {
+    private fun provideRetrofit(baseURL: String, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(baseURL)
                 .client(client)
