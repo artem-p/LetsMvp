@@ -20,12 +20,12 @@ class RepositoryImpl(private val tmdbService: TmdbService,
     }
 
     override fun getMoviesFromMemory(): Observable<TmdbMovie> {
-        if (isUpToDate()) {
-            return Observable.fromIterable(movies)
+        return if (isUpToDate()) {
+            Observable.fromIterable(movies)
         } else {
             lastUpdateTime = System.currentTimeMillis()
             movies.clear()
-            return Observable.empty()
+            Observable.empty()
         }
     }
 
