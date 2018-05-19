@@ -3,6 +3,7 @@ package ru.artempugachev.letsmvp.topmovies
 import io.reactivex.Observable
 import ru.artempugachev.letsmvp.topmovies.api.OmdbService
 import ru.artempugachev.letsmvp.topmovies.api.TmdbMovie
+import ru.artempugachev.letsmvp.topmovies.api.TmdbResponse
 import ru.artempugachev.letsmvp.topmovies.api.TmdbService
 
 class RepositoryImpl(private val tmdbService: TmdbService,
@@ -15,10 +16,14 @@ class RepositoryImpl(private val tmdbService: TmdbService,
     /**
      * Check if cache is up to date
      * */
-    fun isUpToDate(): Boolean {
+    private fun isUpToDate(): Boolean {
           return System.currentTimeMillis() - lastUpdateTime < VALID_TIME
     }
 
+
+    /**
+     * Get movies from memory cache
+     * */
     override fun getMoviesFromMemory(): Observable<TmdbMovie> {
         return if (isUpToDate()) {
             Observable.fromIterable(movies)
@@ -29,8 +34,25 @@ class RepositoryImpl(private val tmdbService: TmdbService,
         }
     }
 
+
+    /**
+     * Get movies from network and save them to the cache
+     * */
     override fun getMoviesFromNetwork(): Observable<TmdbMovie> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // concat results from 3 pages
+        val topRatedMoviesObservable = tmdbService.getTopRatedMovies(1)
+                .concatWith(tmdbService.getTopRatedMovies(2))
+                .concatWith(tmdbService.getTopRatedMovies(3))
+
+
+        // extract movies from tmdb response
+        // use concatMap to preserve order
+        return topRatedMoviesObservable.concatMap {
+            tmdbResponse: TmdbResponse -> Observable.fromIterable(tmdbResponse.results)
+        }.doOnNext {
+            // save movies to cache
+            movie: TmdbMovie -> movies.add(movie)
+        }
     }
 
     override fun getCountriesFromMemory(): Observable<String> {
