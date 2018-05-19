@@ -10,7 +10,7 @@ interface Repository {
 
     fun getCountriesFromMemory(): Observable<String>
 
-    fun getCountriesFromNetwork(): Observable<String>
+    fun getCountriesFromNetwork(): Observable<String?>
 
     fun getCountryData(): Observable<String>
 

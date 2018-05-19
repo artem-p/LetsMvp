@@ -1,10 +1,8 @@
 package ru.artempugachev.letsmvp.topmovies
 
 import io.reactivex.Observable
-import ru.artempugachev.letsmvp.topmovies.api.OmdbService
-import ru.artempugachev.letsmvp.topmovies.api.TmdbMovie
-import ru.artempugachev.letsmvp.topmovies.api.TmdbResponse
-import ru.artempugachev.letsmvp.topmovies.api.TmdbService
+import io.reactivex.Observer
+import ru.artempugachev.letsmvp.topmovies.api.*
 
 class RepositoryImpl(private val tmdbService: TmdbService,
                      private val omdbService: OmdbService) : Repository {
@@ -71,8 +69,26 @@ class RepositoryImpl(private val tmdbService: TmdbService,
     }
 
 
-    override fun getCountriesFromNetwork(): Observable<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    /**
+     * Get countries from the network and save them to the memory cache
+     * */
+    override fun getCountriesFromNetwork(): Observable<String?> {
+        // First get movie
+        // Then get country for this movie in another query
+
+        return getMoviesFromNetwork().concatMap { tmdbMovie: TmdbMovie ->
+            val title = tmdbMovie.title
+
+            if (title != null) {
+                omdbService.getCountry(title)
+            } else {
+                // don't know how to do it proper atm
+                omdbService.getCountry("")
+            }
+
+        }.concatMap { omdbResponse: OmdbResponse ->
+            Observable.just(omdbResponse.country)
+        }.doOnNext { country: String -> countries.add(country) }
     }
 
     override fun getCountryData(): Observable<String> {
