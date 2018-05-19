@@ -20,7 +20,13 @@ class RepositoryImpl(private val tmdbService: TmdbService,
     }
 
     override fun getMoviesFromMemory(): Observable<TmdbMovie> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isUpToDate()) {
+            return Observable.fromIterable(movies)
+        } else {
+            lastUpdateTime = System.currentTimeMillis()
+            movies.clear()
+            return Observable.empty()
+        }
     }
 
     override fun getMoviesFromNetwork(): Observable<TmdbMovie> {
