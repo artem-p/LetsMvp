@@ -51,13 +51,25 @@ class RepositoryImpl(private val tmdbService: TmdbService,
             tmdbResponse: TmdbResponse -> Observable.fromIterable(tmdbResponse.results)
         }.doOnNext {
             // save movies to cache
+            // Rx call this function every time observable emit new item
             movie: TmdbMovie -> movies.add(movie)
         }
     }
 
+
+    /**
+     * Get countries from memory cache
+     * */
     override fun getCountriesFromMemory(): Observable<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return if (isUpToDate()) {
+            Observable.fromIterable(countries)
+        } else {
+            lastUpdateTime = System.currentTimeMillis()
+            countries.clear()
+            Observable.empty()
+        }
     }
+
 
     override fun getCountriesFromNetwork(): Observable<String> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
