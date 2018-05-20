@@ -92,11 +92,11 @@ class RepositoryImpl(private val tmdbService: TmdbService,
     }
 
     override fun getCountryData(): Observable<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return getCountriesFromMemory().switchIfEmpty(getCountriesFromNetwork())
     }
 
     override fun getMovieData(): Observable<TmdbMovie> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return getMoviesFromMemory().switchIfEmpty(getMoviesFromNetwork())
     }
 
 
