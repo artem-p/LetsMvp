@@ -42,7 +42,7 @@ class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
      * */
     fun addItem(viewModel: MovieViewModel) {
         movies.add(viewModel)
-        notifyItemChanged(movies.size - 1)
+        notifyItemInserted(movies.size - 1)
     }
 
 

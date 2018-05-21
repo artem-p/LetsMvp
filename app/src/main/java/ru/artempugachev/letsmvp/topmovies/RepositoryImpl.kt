@@ -107,6 +107,6 @@ class RepositoryImpl(private val tmdbService: TmdbService,
 
 
     companion object {
-        const val VALID_TIME = 10 * 1000    // time after cache expired
+        const val VALID_TIME = 20 * 1000    // time after cache expired
     }
 }
