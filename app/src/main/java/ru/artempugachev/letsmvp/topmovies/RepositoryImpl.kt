@@ -15,7 +15,7 @@ class RepositoryImpl(private val tmdbService: TmdbService,
      * Check if cache is up to date
      * */
     private fun isUpToDate(): Boolean {
-          return System.currentTimeMillis() - lastUpdateTime < VALID_TIME
+        return System.currentTimeMillis() - lastUpdateTime < VALID_TIME
     }
 
 
@@ -87,7 +87,13 @@ class RepositoryImpl(private val tmdbService: TmdbService,
             }
 
         }.concatMap { omdbResponse: OmdbResponse ->
-            Observable.just(omdbResponse.country)
+            // if current movie is not in omdb, they response with 200 and JSON with error
+            // check if country is in response, return "" otherwise
+            if (omdbResponse.country != null) {
+                Observable.just(omdbResponse.country)
+            } else {
+                Observable.just("")
+            }
         }.doOnNext { country: String -> countries.add(country) }
     }
 
