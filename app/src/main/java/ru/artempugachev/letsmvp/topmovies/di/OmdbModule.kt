@@ -26,7 +26,7 @@ class OmdbModule {
         val apiKeyInterceptor = Interceptor {
             chain ->
             var request = chain.request()
-            val url = request.url().newBuilder().addQueryParameter("api_key", API_KEY).build()
+            val url = request.url().newBuilder().addQueryParameter("apikey", API_KEY).build()
             request = request.newBuilder().url(url).build()
             chain.proceed(request)
         }
